@@ -1,0 +1,411 @@
+<html>
+	<head>
+		<!-- Add title -->
+		<title>View Albums</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<!-- Added JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+	<style>
+	/* Body margin of 20px with font-family */
+	body {
+		margin: 20px;
+		font-family: Comic Sans MS, cursive, sans-serif;
+		}
+	
+	/* background-color blue */
+	body {background-color: #B0E0E6;
+		}
+	
+	/* the top overflow content is hidden and background colour with box-shadow */
+	.top{
+		overflow: hidden;
+		background-color: #800040;
+		box-shadow: 10px 10px 5px black;
+		}
+			
+	/* This function details the text within the the top */		
+	.top a {
+		float: left; 
+		color: white;
+		text-align: center;
+		padding: 24px 36px;
+		text-decoration: underline;
+		font-size: 19px;
+		}
+			
+	/* When you hover over one of the heading in changes colour */	
+	.top a:hover {
+		background-color: #00cccc;
+		}
+	
+	/* changes class active to blue and white */
+	.top a.active {
+	background-color: darkblue;
+	color: white;
+		}
+		
+	/* When you hover over one of the heading in changes colour */	
+	.top a.active:hover {
+		background-color: #00cccc;
+		}	
+		
+	/* footer label positioning fixed at below position*/
+	.footer {
+	  position: fixed;
+	  left: 0;
+	  bottom: 0;
+	  width: 10px;
+		}
+		
+	/* styling header and paragraph*/
+	.contact {
+	  background-color:lightblue;
+	  border: 4px solid lightgreen;
+	  border-radius: 1em;
+			}
+
+	/* This will center the form on the page, background-color and border */		
+	form {
+	  margin: 0 auto;
+	  width: 600px;
+	  background-color:lightblue;
+	  padding: 1em;
+	  border: 4px solid lightgreen;
+	  border-radius: 1em;
+	}
+	
+	.table, th, td{
+	  border: 3px solid black;
+	  background-color: yellow; 
+	}
+	
+	.tr:hover {background-color: #f5f5f5;}
+	
+	.table{
+	  table-layout: fixed;
+	  width: 1200px;
+	}
+
+	/* Style inputs, select elements and textareas */
+	.input[type=text], select, textarea{
+	  width: 100%;
+	  padding: 12px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  box-sizing: border-box;
+	  resize: vertical;
+	}
+
+	/* Style the label to display next to the inputs */
+	.label {
+	  padding: 12px 12px 12px 0;
+	  display: block;
+	}
+	
+	/* Style the container */
+	.container {
+	  width: 1500px;
+	  margin: auto;	
+	  background-color: #f2f2f2;
+	 
+	}
+
+	/* Floating column for labels: 25% width */
+	.col-25 {
+	  float: none;
+	  width: 25%;
+	  margin-top: 6px;
+	  }
+
+	/* Floating column for inputs: 75% width */
+	.col-75 {
+	  float: none;
+	  width: 75%;
+	  margin-top: 6px;
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+
+	/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+	@media screen and (max-width: 600px) {
+	  .col-25, .col-75, input[type=submit] {
+		width: 100%;
+		margin-top: 0;
+  }
+}
+</style>
+	
+	<body>
+	
+		<div class="top">
+		<a href="login.html">Login</a>
+		<a href="webapplication.html">Artists</a>
+		<a class="active" href="webapp.html">Albums</a>
+		<a href="contact.html">Contact Us</a>
+		</div>
+		<br>
+		
+		<h1>Albums</h1>
+		<div>
+			<button id="showCreateButton" onclick="showCreate()">Create</button>
+		</div>
+		<br/>
+		
+		<div>
+			<table class="table" id="albumsTable">
+				<tr class="tr">
+					<th>ID</th>
+					<th>Title</th>
+					<th>Artist</th>
+					<th>Duration</th>
+					<th>Update</th>
+					<th>Delete</th>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="container" id='createUpdateForm' style="display: none">
+			<h2><span id="createlabel">Create an</span> <span id="updatelabel">Update this</span> Album</h2>
+			<div class="row">
+				<div class="col-75">
+					<input type="hidden" name="id">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-25">
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">Title</label>
+				</div>
+				<div class="col-75">
+					<input class="type="text" name="title">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">Artist</label>
+				</div>
+				<div class="col-75">
+					<input class="type="text" name="artist">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">Duration</label>
+				</div>
+				<div class="col-75">
+					<input type="number" name="duration">
+				</div>
+			</div>
+			
+			<span><button id="doCreateButton" onclick="doCreate()">Create</button></span>
+			<span><button id="doUpdateButton" onclick="doUpdate()">Update</button></span>
+		</div>	
+	</body>
+	<script>
+	function showCreate(){
+		document.getElementById('showCreateButton').style.display="none"
+		document.getElementById('albumsTable').style.display="none"
+		document.getElementById('createUpdateForm').style.display="block"
+		
+		document.getElementById('createlabel').style.display="inline"
+		document.getElementById('updatelabel').style.display="none"
+		
+		document.getElementById('doCreateButton').style.display="block"
+		document.getElementById('doUpdateButton').style.display="none"
+	}
+	
+	
+	function showViewAll() {
+		document.getElementById('showCreateButton').style.display="block"
+		document.getElementById('albumsTable').style.display="inline"
+			
+		document.getElementById('createUpdateForm').style.display="none"
+		
+	}
+	
+	function showUpdate(buttonElement){
+		document.getElementById('showCreateButton').style.display="none"
+		document.getElementById('albumsTable').style.display="none"
+		document.getElementById('createUpdateForm').style.display="block"
+		
+		document.getElementById('createlabel').style.display="none"
+		document.getElementById('updatelabel').style.display="inline"
+		
+		document.getElementById('doCreateButton').style.display="none"
+		document.getElementById('doUpdateButton').style.display="block"
+		
+		var rowElement = buttonElement.parentNode.parentNode
+		var albums = getAlbumsFromRow(rowElement)
+		populateFormWithAlbums(albums)
+	}
+	function doCreate(){	
+		var form = document.getElementById('createUpdateForm')
+		
+		var albums = {}
+		albums.title = form.querySelector('input[name="title"]').value
+		albums.artist =	form.querySelector('input[name="artist"]').value
+		albums.duration = form.querySelector('input[name="duration"]').value
+		console.log(JSON.stringify(albums))
+		host=window.location.origin
+			
+		
+			 $.ajax({
+						 "url":host+"/albums",
+						 "method":"POST",
+						 "data":JSON.stringify(albums),	
+						 "dataType": "JSON",
+						 contentType: "application/json; charset=utf-8",
+						 "success":function(result){
+							console.log(result);
+							albums.id = result.id
+							addAlbumsToTable(albums)
+							clearForm()
+							showViewAll()
+							
+					 },
+					 
+						 "error":function(xhr,status,error){
+							console.log("error: "+status+" msg:"+error);
+					 }
+				 });	
+	}
+	
+	function doUpdate(){
+		var albums = getAlbumsFromForm();
+		var rowElement = document.getElementById(albums.id);
+		host=window.location.origin
+			$.ajax({
+                    "url":host+"/albums/"+encodeURI(albums.id),
+                    "method":"PUT",
+                    "data":JSON.stringify(albums),
+                    "dataType": "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    "success":function(result){
+                        console.log(result);
+                        
+                    },
+                    "error":function(xhr,status,error){
+                        console.log("error: "+status+" msg:"+error);
+                    }
+				 });
+		setAlbumsInRow(rowElement, albums);
+		clearForm();
+		showViewAll();
+	}
+	function doDelete(r){
+		var tableElement = document.getElementById('albumsTable');
+		var rowElement = r.parentNode.parentNode;
+		var index = rowElement.rowIndex;
+		host=window.location.origin
+			$.ajax({
+						 "url":host+"/albums/"+encodeURI(album.id),
+						 "method":"DELETE",
+						 "data":"",
+						 "dataType": "JSON",
+						 contentType: "application/json; charset=utf-8",
+						 "success":function(result){
+							console.log(result);
+							
+					 },
+						 "error":function(xhr,status,error){
+							console.log("error: "+status+" msg:"+error);
+					 }
+				 });
+		tableElement.deleteRow(index);
+	}
+	
+	
+	function clearForm(){
+		var form = document.getElementById('createUpdateForm')
+		
+		form.querySelector('input[name="title"]').value =''
+		form.querySelector('input[name="artist"]').value =''
+		form.querySelector('input[name="duration"]').value =''
+	}
+	
+	function addAlbumsToTable(albums){
+		var tableElement = document.getElementById('albumsTable')
+		var rowElement = tableElement.insertRow(-1)
+		rowElement.setAttribute('id',albums.id)
+		var cell1 = rowElement.insertCell(0);
+		cell1.innerHTML = albums.id
+		var cell2 = rowElement.insertCell(1);
+		cell2.innerHTML = albums.title
+		var cell3 = rowElement.insertCell(2);
+		cell3.innerHTML = albums.artist
+		var cell4 = rowElement.insertCell(3);
+		cell4.innerHTML = albums.duration
+		var cell5 = rowElement.insertCell(4);
+		cell5.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+		var cell6 = rowElement.insertCell(5);
+		cell6.innerHTML = '<button onclick="doDelete(this)">Delete</button>'
+	}
+	
+	function getAlbumsFromRow(rowElement){
+		var albums ={}
+		albums.id = rowElement.getAttribute('id')
+		albums.title = rowElement.cells[1].firstChild.textContent
+		albums.artist = rowElement.cells[2].firstChild.textContent
+		albums.duration = parseInt(rowElement.cells[3].firstChild.textContent,10)
+		return albums
+	}
+	
+	function populateFormWithAlbums(albums){
+		var form = document.getElementById('createUpdateForm')
+        form.querySelector('input[name="id"]').disabled = true
+		
+		form.querySelector('input[name="id"]').value = albums.id
+		form.querySelector('input[name="title"]').value = albums.title
+		form.querySelector('input[name="artist"]').value = albums.artist
+		form.querySelector('input[name="duration"]').value = albums.duration
+		return albums
+	}
+	
+	function getAlbumsFromForm(){
+		var form = document.getElementById('createUpdateForm')
+		var albums = {}
+		albums.id = form.querySelector('input[name="id"]').value
+		albums.title = form.querySelector('input[name="title"]').value
+		albums.artist = form.querySelector('input[name="artist"]').value
+		albums.duration = parseInt(form.querySelector('input[name="duration"]').value,10)
+		console.log(JSON.stringify(albums))
+		return albums
+	}
+	function setAlbumsInRow(rowElement, albums){
+		rowElement.cells[0].firstChild.textContent= albums.id
+		rowElement.cells[1].firstChild.textContent= albums.title
+		rowElement.cells[2].firstChild.textContent= albums.artist
+		rowElement.cells[3].firstChild.textContent= albums.duration
+	
+	}
+	
+	function getAllal(){
+	host=window.location.origin
+                $.ajax({
+                    "url": host+"/albums",
+                    "method": "GET",
+                    "data": "",
+                    "dataType": "JSON",
+                    "success": function (result) {
+                        //console.log(result);
+                        for(album of result){
+                            addAlbumsToTable(album);
+                        }
+                    },
+                    "error": function (xhr, status, error) {
+                        console.log("error: " + status + " msg:" + error);
+                    }
+                });
+            }
+    getAllal();
+	
+	
+	</script>
+</html>

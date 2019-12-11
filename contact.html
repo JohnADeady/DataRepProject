@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Contact Us</title>
+<style>
+	/* Body margin of 20px with font-family */
+	body {
+		margin: 20px;
+		font-family: Comic Sans MS, cursive, sans-serif;
+		}
+	
+	/* background-color blue */
+	body {background-color: black;
+		}
+	
+	/* the top overflow content is hidden and background colour with box-shadow */
+	.top{
+		overflow: hidden;
+		background-color: #800040;
+		box-shadow: 10px 10px 5px black;
+		}
+			
+	/* This function details the text within the the top */		
+	.top a {
+		float: left; 
+		color: white;
+		text-align: center;
+		padding: 24px 36px;
+		text-decoration: underline;
+		font-size: 19px;
+		}
+			
+	/* When you hover over one of the heading in changes colour */	
+	.top a:hover {
+		background-color: #00cccc;
+		}
+	
+	/* changes class active to blue and white */
+	.top a.active {
+	background-color: darkblue;
+	color: white;
+		}
+		
+	/* When you hover over one of the heading in changes colour */	
+	.top a.active:hover {
+		background-color: #00cccc;
+		}	
+		
+	/* styling header and paragraph*/
+	.contact {
+	  background-color:lightblue;
+	  border: 4px solid lightgreen;
+	  border-radius: 1em;
+			}
+
+	/* This will center the form on the page, background-color and border */		
+	form {
+	  margin: 0 auto;
+	  width: 400px;
+	  background-color:lightblue;
+	  padding: 1em;
+	  border: 4px solid lightgreen;
+	  border-radius: 1em;
+	}
+
+	/* Margin between each cell is 1 em */
+	form div + div {
+	  margin-top: 1em;
+	}
+
+	/* All labels have the same size and are properly aligned */
+	label {
+	  display: inline-block; /* displaying items horizontally */
+	  width: 90px;
+	  text-align: right;
+	}
+	
+	/* All text fields have the same font settings, same size text field and same border field */
+	input, textarea {
+	  font: 1em sans-serif;
+	  width: 300px;
+	  box-sizing: border-box;
+	  border: 2px solid #999;
+	}
+
+	/* To highlight what field is being updated */
+	input:focus, textarea:focus {
+	  border-color: #000080;
+	}
+
+	/* To properly align multiline text fields with their labels and enough room to type */
+	textarea {
+	  vertical-align: top;
+	  height: 5em;
+	}
+	
+		/* To properly align multiline text fields with their labels */
+	.button {
+	  padding-left: 190px; 
+	}
+</style>
+</head>
+
+
+<body>
+	<!-- The headings in the navigation bar linking all headings to this page and styling of navigation bar -->
+	<div class="top">
+	<a href="login.html">Login</a>
+	<a href="webapplication.html">Artists</a>
+	<a href="webapp.html">Albums</a>
+	<a class="active" href="contact.html">Contact Us</a>
+	</div>
+	<br>
+	
+	<div class="contact">
+	<h2 align="center"> Contact Us</h2>
+	<p> Please update your contact details in the below form and we will contact to you at our earliest convenience. You to contact us to query information or if you would like to register on this site</p>
+	</div>
+	
+	<br>
+	<!-- Create a form and for contact us and once completed submit using onsubmit -->
+	<form action="/my-handling-form-page" name="form" onsubmit="return validateName()" method="post">
+
+	<!-- create labels including Name, an valid email address, phone number which must be numbers and message for form and id to style these labels. Placeholder will be inserted into each text before input -->
+	<div>
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="user_name" placeholder="Name"> 
+	  </div>
+	  <div>
+		<label for="mail">E-mail:</label> 
+		<input type="email" id="mail" name="email" placeholder="Enter your email here" required>
+	  </div>
+	  <div>
+		 <label for="phone">Phone:</label>
+		 <input type="number" id="phone" name="user_phone" placeholder="123" required>
+	   </div>
+	  <div>
+		<label for="msg">Message:</label>
+		<textarea id="msg" name="user_message" placeholder="Enter your comments" required></textarea>
+	  </div>
+	  
+	 <!-- create button to be submitted -->
+	 <div class="button">
+	  <button type="submit">Submit</button>
+	</div>
+	
+<script>
+
+// create function for Name text
+function validateName()
+			{
+			var x = document.form.user_name.value;
+			if (x == "") {
+			alert("Name must be inputted");	// where Name text is empty create an alert requesting a name to be inputted
+			return false;
+		  }
+}
+</script>
+</html>

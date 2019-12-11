@@ -1,0 +1,85 @@
+<html>
+  <head>
+    <title>Intro - login page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+  </head>
+  
+  <style>
+	/* Body margin of 20px with font-family */
+	body {
+		margin: 20px;
+		font-family: Comic Sans MS, cursive, sans-serif;
+		}
+	
+	/* background-color blue */
+	body {background-color: #B0E0E6;
+		}
+	
+	/* the top overflow content is hidden and background colour with box-shadow */
+	.top{
+		overflow: hidden;
+		background-color: #800040;
+		box-shadow: 10px 10px 5px black;
+		}
+			
+	/* This function details the text within the the top */		
+	.top a {
+		float: left; 
+		color: white;
+		text-align: center;
+		padding: 24px 36px;
+		text-decoration: underline;
+		font-size: 19px;
+		}
+			
+	/* When you hover over one of the heading in changes colour */	
+	.top a:hover {
+		background-color: #00cccc;
+		}
+	
+	/* changes class active to blue and white */
+	.top a.active {
+	background-color: darkblue;
+	color: white;
+		}
+		
+	/* When you hover over one of the heading in changes colour */	
+	.top a.active:hover {
+		background-color: #00cccc;
+		}	
+		
+	
+		
+	
+</style>
+
+   <body>
+   
+		<div class="top">
+		<a class="active" href="login.html">Login</a>
+		<a href="webapplication.html">Artists</a>
+		<a href="webapp.html">Albums</a>
+		<a href="contact.html">Contact Us</a>
+		</div>
+		<br>
+		
+		<div class="container">
+      <h1>Please login</h1>
+      <br>
+      <form action="/login" method="POST">
+		  <input type="username" name="username" placeholder="Username">
+		<input type="password" name="password" placeholder="Password">
+		<input type="submit" name="submit" value="Log in">
+		
+		<!-- not yet a memeber link to register by contacting us form -->
+		<p class="change_link">
+		Not registed yet ?
+		<a href="contact.html" class="to_register">Join us</a>
+		</p>
+		</form>
+	  </div>
+
+    
+  </body>
+</html>

@@ -1,0 +1,392 @@
+<html>
+	<head>
+		<!-- Add title -->
+		<title>View Artists</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<!-- Added JQuery -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	</head>
+	
+	<style>
+	/* Body margin of 20px with font-family */
+	body {
+		margin: 20px;
+		font-family: Comic Sans MS, cursive, sans-serif;
+		}
+	
+	/* background-color blue */
+	body {background-color: #B0E0E6;
+		}
+	
+	/* the top overflow content is hidden and background colour with box-shadow */
+	.top{
+		overflow: hidden;
+		background-color: #800040;
+		box-shadow: 10px 10px 5px black;
+		}
+			
+	/* This function details the text within the the top */		
+	.top a {
+		float: left; 
+		color: white;
+		text-align: center;
+		padding: 24px 36px;
+		text-decoration: underline;
+		font-size: 19px;
+		}
+			
+	/* When you hover over one of the heading in changes colour */	
+	.top a:hover {
+		background-color: #00cccc;
+		}
+	
+	/* changes class active to blue and white */
+	.top a.active {
+	background-color: darkblue;
+	color: white;
+		}
+		
+	/* When you hover over one of the heading in changes colour */	
+	.top a.active:hover {
+		background-color: #00cccc;
+		}	
+	
+	.table, th, td{
+	  border: 3px solid black;
+	  background-color: yellow; 
+	}
+	
+	.tr:hover {background-color: #f5f5f5;}
+	
+	.table{
+	  table-layout: fixed;
+	  width: 1200px;
+	}
+
+	/* Style inputs, select elements and textareas */
+	.input[type=text], select, textarea{
+	  width: 100%;
+	  padding: 12px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  box-sizing: border-box;
+	  resize: vertical;
+	}
+
+	/* Style the label to display next to the inputs */
+	.label {
+	  padding: 12px 12px 12px 0;
+	  display: inline-block;
+	}
+	/* Style the container */
+	.container {
+	  border-radius: 5px;
+	  background-color: #f2f2f2;
+	  padding: 20px;
+	}
+
+	/* Floating column for labels: 25% width */
+	.col-25 {
+	  float: left;
+	  width: 25%;
+	  margin-top: 6px;
+	}
+
+	/* Floating column for inputs: 75% width */
+	.col-75 {
+	  float: left;
+	  width: 25%;
+	  margin-top: 6px;
+	}
+
+	/* Clear floats after the columns */
+	.row:after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+
+	/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+	@media screen and (max-width: 600px) {
+	  .col-25, .col-75, input[type=submit] {
+		width: 100%;
+		margin-top: 0;
+  }
+}
+</style>
+	
+	<body>
+		<!-- The headings in the navigation bar linking all headings to this page and styling of navigation bar -->
+	<div class="top">
+	<a href="login.html">Login</a>
+	<a class="active" href="webapplication.html">Artists</a>
+	<a href="webapp.html">Albums</a>
+	<a href="contact.html">Contact Us</a>
+	</div>
+	<br>
+	
+		<h1>Artists</h1>
+		<div>
+			<button id="showCreateButton" onclick="showCreate()">Create</button>
+		</div>
+		<br/>
+		
+		<div>
+			<table class="table" id="artistsTable">
+				<tr class="tr">
+					<th>ID</th>
+					<th>Name</th>
+					<th>Genre</th>
+					<th>Albums</th>
+					<th>Update</th>	
+					<th>Delete</th>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="container" id='createUpdateForm' style="display: none">
+			<h2><span id="createlabel">Create an</span> <span id="updatelabel">Update this</span> Artists</h2>
+			<div class="row">
+				<div class="col-75">
+					<input type="hidden" name="id">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">Name</label>
+				</div>
+				<div class="col-75">
+					<input class="type="text" name="name">
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">Genre</label>
+				</div>
+				<div class="col-75">
+					<select name="genre">
+								<option value="Rock">Rock</option>
+								<option value="Hip Hop">Hip Hop</option>
+								<option value="Pop">Pop</option>
+								<option value="Classical">Classical</option>
+								<option value="Traditional">Traditional</option>
+						   </select>
+				</div>
+			</div>	
+
+			<div class="row">
+				<div class="col-25">
+					<label for="fname">Albums</label>
+				</div>
+			<div class="col-75">
+					<input type="number" name="albums">
+				</div>
+			</div>
+			
+			<span><button id="doCreateButton" onclick="doCreate()">Create</button></span>
+			<span><button id="doUpdateButton" onclick="doUpdate()">Update</button></span>
+		</div>	
+	</body>
+	<script>
+	function showCreate(){
+		document.getElementById('showCreateButton').style.display="none"
+		document.getElementById('artistsTable').style.display="none"
+		document.getElementById('createUpdateForm').style.display="block"
+		
+		document.getElementById('createlabel').style.display="inline"
+		document.getElementById('updatelabel').style.display="none"
+		
+		document.getElementById('doCreateButton').style.display="block"
+		document.getElementById('doUpdateButton').style.display="none"
+	}
+	
+	
+	function showViewAll() {
+		document.getElementById('showCreateButton').style.display="block"
+		document.getElementById('artistsTable').style.display="inline"
+			
+		document.getElementById('createUpdateForm').style.display="none"
+		
+	}
+	
+	function showUpdate(buttonElement){
+		document.getElementById('showCreateButton').style.display="none"
+		document.getElementById('artistsTable').style.display="none"
+		document.getElementById('createUpdateForm').style.display="block"
+		
+		document.getElementById('createlabel').style.display="none"
+		document.getElementById('updatelabel').style.display="inline"
+		
+		document.getElementById('doCreateButton').style.display="none"
+		document.getElementById('doUpdateButton').style.display="block"
+		
+		var rowElement = buttonElement.parentNode.parentNode
+		var artists = getArtistsFromRow(rowElement)
+		populateFormWithArtists(artists)
+	}
+	function doCreate(){	
+		var form = document.getElementById('createUpdateForm')
+		
+		var artists = {}
+		//artists.id = form.querySelector('input[name="id"]').value
+		artists.name = form.querySelector('input[name="name"]').value
+		artists.genre =	form.querySelector('select[name="genre"]').value
+		artists.albums = form.querySelector('input[name="albums"]').value
+		console.log(JSON.stringify(artists))
+		host=window.location.origin
+		
+			
+		
+			 $.ajax({
+						 "url": host+"/artists",
+						 "method":"POST",
+						 "data":JSON.stringify(artists),
+						 "dataType": "JSON",
+						 contentType: "application/json; charset=utf-8",
+						 "success":function(result){
+							console.log(result);
+							artists.id = result.id
+							addArtistsToTable(artists)
+							clearForm()
+							showViewAll()
+							
+					 },
+					 
+						 "error":function(xhr,status,error){
+							console.log("error: "+status+" msg:"+error);
+					 }
+				 });
+		
+		
+	}
+	
+	function doUpdate(){
+		var artists = getArtistsFromForm();
+		var rowElement = document.getElementById(artists.id);
+		host=window.location.origin
+			$.ajax({
+                    "url":host+"artists/"+encodeURI(artists.id),
+                    "method":"PUT",
+                    "data":JSON.stringify(artists),
+                    "dataType": "JSON",
+                    contentType: "application/json; charset=utf-8",
+                    "success":function(result){
+                        console.log(result);
+                        
+                    },
+                    "error":function(xhr,status,error){
+                        console.log("error: "+status+" msg:"+error);
+                    }
+				 });
+		setArtistsInRow(rowElement, artists);
+		clearForm();
+		showViewAll();
+	}
+	function doDelete(r){
+		var tableElement = document.getElementById('artistsTable');
+		var rowElement = r.parentNode.parentNode;
+		var index = rowElement.rowIndex;
+		host=window.location.origin
+			$.ajax({
+						 "url":host+"/artists/"+encodeURI(artist.id),
+						 "method":"DELETE",
+						 "data":"",
+						 "dataType": "JSON",
+						 contentType: "application/json; charset=utf-8",
+						 "success":function(result){
+							console.log(result);
+							
+					 },
+						 "error":function(xhr,status,error){
+							console.log("error: "+status+" msg:"+error);
+					 }
+				 });
+		tableElement.deleteRow(index);
+	}
+	
+	
+	function clearForm(){
+		var form = document.getElementById('createUpdateForm')
+		
+		form.querySelector('input[name="name"]').value =''
+		form.querySelector('select[name="genre"]').value =''
+		form.querySelector('input[name="albums"]').value =''
+	}
+	function addArtistsToTable(artists){
+		var tableElement = document.getElementById('artistsTable')
+		var rowElement = tableElement.insertRow(-1)
+		rowElement.setAttribute('id',artists.id)
+		var cell1 = rowElement.insertCell(0);
+		cell1.innerHTML = artists.id
+		var cell2 = rowElement.insertCell(1);
+		cell2.innerHTML = artists.name
+		var cell3 = rowElement.insertCell(2);
+		cell3.innerHTML = artists.genre
+		var cell4 = rowElement.insertCell(3);
+		cell4.innerHTML = artists.albums
+		var cell5 = rowElement.insertCell(4);
+		cell5.innerHTML = '<button onclick="showUpdate(this)">Update</button>'
+		var cell6 = rowElement.insertCell(5);
+		cell6.innerHTML = '<button onclick="doDelete(this)">Delete</button>'
+	}
+	function getArtistsFromRow(rowElement){
+		var artists ={}
+		artists.id = rowElement.getAttribute('id')
+		artists.name = rowElement.cells[1].firstChild.textContent
+		artists.genre = rowElement.cells[2].firstChild.textContent
+		artists.albums = parseInt(rowElement.cells[3].firstChild.textContent,10)
+		return artists
+	}
+	function populateFormWithArtists(artists){
+		var form = document.getElementById('createUpdateForm')
+        form.querySelector('input[name="id"]').disabled = true
+		
+		form.querySelector('input[name="id"]').value = artists.id
+		form.querySelector('input[name="name"]').value = artists.name
+		form.querySelector('select[name="genre"]').value = artists.genre
+		form.querySelector('input[name="albums"]').value = artists.albums
+		return artists
+	}
+	function getArtistsFromForm(){
+		var form = document.getElementById('createUpdateForm')
+		var artists = {}
+		artists.id = form.querySelector('input[name="id"]').value
+		artists.name = form.querySelector('input[name="name"]').value
+		artists.genre = form.querySelector('select[name="genre"]').value
+		artists.albums = parseInt(form.querySelector('input[name="albums"]').value,10)
+		console.log(JSON.stringify(artists))
+		return artists
+	}
+	function setArtistsInRow(rowElement, artists){
+		rowElement.cells[0].firstChild.textContent= artists.id
+		rowElement.cells[1].firstChild.textContent= artists.name
+		rowElement.cells[2].firstChild.textContent= artists.genre
+		rowElement.cells[3].firstChild.textContent= artists.albums
+	
+	}
+	
+	function getAll(){
+	host=window.location.origin
+                $.ajax({
+                    "url": host+"/artists",
+                    "method": "GET",
+                    "data": "",
+                    "dataType": "JSON",
+                    "success": function (result) {
+                        //console.log(result);
+                        for(artist of result){
+                            addArtistsToTable(artist);
+                        }
+                    },
+                    "error": function (xhr, status, error) {
+                        console.log("error: " + status + " msg:" + error);
+                    }
+                });
+            }
+    getAll();
+	
+	
+	
+	</script>
+</html>
